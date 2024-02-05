@@ -66,6 +66,41 @@ const createTeacher = async (data: Teacher) => {
   }
 };
 
+const updateTeacher = async (id: Teacher, data: Teacher) => {
+  try {
+    const { teacher_id, firstname, lastname, password } = data;
+    const teacher = await prisma.teachers.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        teacher_id,
+        firstname,
+        lastname,
+        password,
+      },
+    });
+    return teacher;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+const deleteTeacher = async (id: Teacher) => {
+  try {
+    const teacher = await prisma.teachers.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+    return teacher;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
 const LoginTeacher = async (data: Teacher) => {
   try {
     const { teacher_id, password } = data;
@@ -120,4 +155,6 @@ export default {
   createTeacher,
   LoginTeacher,
   verifyToken,
+  updateTeacher,
+  deleteTeacher,
 };

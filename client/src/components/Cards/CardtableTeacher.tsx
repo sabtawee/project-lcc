@@ -79,15 +79,15 @@ function CardtableTeacher({}: Props) {
             </thead>
             <tbody>
               {datas.map((data: any, i : number) => (
-              <tr>
+              <tr key={i}>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   {data.teacher_id}
                 </td>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                  {data.firsname} {data.lastname}
+                  {data.firstname} {data.lastname}
                 </th>
                 <td className="border-t-0 px-1 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
-                  <button className=" btn btn-error btn-sm">
+                  <button className=" btn btn-error btn-sm" onClick={()=> handleDelete(data.id)}>
                     <i className="fas fa-trash mr-1"></i>
                     Delete
                   </button>

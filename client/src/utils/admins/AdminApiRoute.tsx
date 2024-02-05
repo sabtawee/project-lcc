@@ -7,4 +7,7 @@ export const AdminApiRouter = {
 
     // subject
     subject : "/api/v1/subjects",
+
+    // users
+    users : "/api/v1/users"
   };

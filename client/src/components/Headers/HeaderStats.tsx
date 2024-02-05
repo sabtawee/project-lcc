@@ -1,19 +1,31 @@
-import { useEffect, useState } from "react"
-import CardStats from "../Cards/CardStats"
-import ApiUrl from "../../utils/ApiUrl"
-import { AdminApiRouter } from "../../utils/admins/AdminApiRoute"
+import { useEffect, useState } from "react";
+import CardStats from "../Cards/CardStats";
+import ApiUrl from "../../utils/ApiUrl";
+import { AdminApiRouter } from "../../utils/admins/AdminApiRoute";
+import { useLocation } from "react-router-dom";
 
-
-
-type Props = {}
+type Props = {};
 
 function HeaderStats({}: Props) {
-  const [teacher , setTeacher] = useState(0)
-  const [student , setStudent] = useState(0)
-  const [course , setCourse] = useState(0)
-  const [admin , setAdmin] = useState(0)
-  
+  const location = useLocation();
+  const [teacher, setTeacher] = useState(0);
+  const [student, setStudent] = useState(0);
+  const [course, setCourse] = useState(0);
+  const [admin, setAdmin] = useState(0);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await ApiUrl.get(AdminApiRouter.teacher);
+      setTeacher(res.data.response.length);
+      const res2 = await ApiUrl.get(AdminApiRouter.student);
+      setStudent(res2.data.response.length);
+      const res4 = await ApiUrl.get(AdminApiRouter.subject);
+      setCourse(res4.data.response.length);
+      const res3 = await ApiUrl.get(AdminApiRouter.users);
+      setAdmin(res3.data.response.length);
+    };
+    fetchData();
+  }, [location.pathname]);
 
   return (
     <>
@@ -26,7 +38,7 @@ function HeaderStats({}: Props) {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="ครูผู้สอน"
-                  statTitle="350,897"
+                  statTitle={teacher.toString()}
                   statPercent="3.48"
                   statPercentColor="text-emerald-500"
                   statIconName="far fa-chart-bar"
@@ -36,7 +48,7 @@ function HeaderStats({}: Props) {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="นักศึกษา"
-                  statTitle="2,356"
+                  statTitle={student.toString()}
                   statArrow="down"
                   statPercent="3.48"
                   statPercentColor="text-red-500"
@@ -48,7 +60,7 @@ function HeaderStats({}: Props) {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="วิชา"
-                  statTitle="924"
+                  statTitle={course.toString()}
                   statArrow="down"
                   statPercent="1.10"
                   statPercentColor="text-orange-500"
@@ -60,7 +72,7 @@ function HeaderStats({}: Props) {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="ผู้ดูแลระบบ"
-                  statTitle="49,65%"
+                  statTitle={admin.toString()}
                   statArrow="up"
                   statPercent="12"
                   statPercentColor="text-emerald-500"
@@ -74,7 +86,7 @@ function HeaderStats({}: Props) {
         </div>
       </div>
     </>
-  )
+  );
 }
 
-export default HeaderStats
+export default HeaderStats;

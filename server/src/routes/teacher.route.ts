@@ -7,6 +7,8 @@ const teacherRouter = async (app: FastifyInstance) => {
   app.post("/", teacherController.handleCreateTeacher);
   app.post("/login", teacherController.handleLoginTeacher);
   app.get("/auth", teacherController.handleGetTeacherBytoken);
+  app.delete("/:id", teacherController.handleDeleteTeacher);
+  app.put("/:id", teacherController.handleUpdateTeacher);
 };
 
 export default teacherRouter;

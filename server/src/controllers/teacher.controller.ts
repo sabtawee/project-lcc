@@ -38,6 +38,45 @@ const handleCreateTeacher = async (request: any, reply: any) => {
   };
 };
 
+const handleDeleteTeacher = async (request: any, reply: any) => {
+  try {
+    const { id } = request.params;
+    const response = await teacherService.deleteTeacher(id);
+    return {
+      statusCode: 200,
+      msg: "delete teacher",
+      response,
+    };
+    
+  } catch (error) {
+    return {
+      statusCode: 500,
+      msg: "Internal Server Error",
+      response: null,
+    };
+    
+  }
+};
+
+const handleUpdateTeacher = async (request: any, reply: any) => {
+  try {
+    const { id } = request.params;
+    const { body } = request;
+    const response = await teacherService.updateTeacher(id, body);
+    return {
+      statusCode: 200,
+      msg: "update teacher",
+      response,
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      msg: "Internal Server Error",
+      response: null,
+    };
+  }
+}
+
 const handleLoginTeacher = async (request: any, reply: any) => {
   try {
     const { body } = request;
@@ -109,4 +148,6 @@ export default {
   handleCreateTeacher,
   handleLoginTeacher,
   handleGetTeacherBytoken,
+  handleDeleteTeacher,
+  handleUpdateTeacher
 };

@@ -2,7 +2,6 @@ import { userService } from "../services";
 
 const handleGetUser = async () => {
   const response = await userService.getUsers();
-
   return {
     statusCode: 200,
     msg: "get all user",
