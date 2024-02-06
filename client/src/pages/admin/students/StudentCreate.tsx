@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ApiUrl from "../../../utils/ApiUrl";
 import { AdminApiRouter } from "../../../utils/admins/AdminApiRoute";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 type Props = {};
@@ -13,6 +13,7 @@ function StudentCreate({}: Props) {
     lastname: "",
     password: "",
     branch: "",
+    model_id: "",
   });
 
   const handleChange = (e: any) => {
@@ -42,6 +43,7 @@ function StudentCreate({}: Props) {
               lastname: "",
               password: "",
               branch: "",
+              model_id: "",
             });
             navigate("/admin/student");
           });
@@ -112,6 +114,20 @@ function StudentCreate({}: Props) {
                   value={studentData.branch}
                   onChange={handleChange}
                   placeholder="นามสกุล"
+                  className="input input-bordered w-full max-w-lx"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  รุ่น
+                </label>
+                <input
+                  type="text"
+                  name="model_id"
+                  value={studentData.model_id}
+                  onChange={handleChange}
+                  placeholder="รุ่น"
                   className="input input-bordered w-full max-w-lx"
                 />
               </div>

@@ -19,6 +19,7 @@ CREATE TABLE `students` (
     `firstname` VARCHAR(191) NOT NULL,
     `lastname` VARCHAR(191) NOT NULL,
     `branch` VARCHAR(191) NOT NULL,
+    `model_id` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),

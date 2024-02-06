@@ -78,9 +78,6 @@ function CardtableSubject({ data }: Props) {
                   </th>
 
                   <td className="border-t-0 px-1 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap">
-                    <button className=" btn btn-primary btn-sm mr-3">
-                      <i className="fas fa-link mr-1"></i> Edit
-                    </button>
                     <button className=" btn btn-error btn-sm" onClick={()=>handleDelete(item.id)}>
                       <i className="fas fa-trash mr-1"></i>
                       Delete

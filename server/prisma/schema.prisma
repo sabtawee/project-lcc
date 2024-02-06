@@ -13,7 +13,7 @@ model grades {
   student_id String
   subject_id String
   teacher_id String
-  grade      String  @default("")
+  grade      String   @default("")
   createdAt  DateTime @default(now())
   updatedAt  DateTime @default(now())
 }
@@ -24,6 +24,7 @@ model students {
   firstname  String
   lastname   String
   branch     String
+  model_id   String
   password   String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @default(now())
@@ -55,4 +56,16 @@ model users {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+}
+
+model setclass {
+  id           Int      @id @default(autoincrement())
+  block_id     String
+  subject_id   String
+  subject_name String
+  teacher_id   String
+  teacher_name String
+  model_id     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
 }

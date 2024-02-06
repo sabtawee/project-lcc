@@ -16,6 +16,8 @@ function Sidebar({}: Props) {
       setActiveMenu("student");
     } else if (location.pathname.startsWith("/admin/subject")) {
       setActiveMenu("subject");
+    }  else if (location.pathname.startsWith("/admin/setclass")) {
+      setActiveMenu("setclass");
     } else {
       setActiveMenu("");
     }
@@ -100,13 +102,16 @@ function Sidebar({}: Props) {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (activeMenu === "" ? "text-blue-500 hover:text-blue-600" : "text-gray-700 hover:text-blue-400")
+                    (activeMenu === ""
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-700 hover:text-blue-400")
                   }
                   to="/admin"
                 >
                   <i
                     className={
-                      "fas fa-tv mr-2 text-sm " + (activeMenu === "" ? "opacity-75" : "text-gray-600")
+                      "fas fa-tv mr-2 text-sm " +
+                      (activeMenu === "" ? "opacity-75" : "text-gray-600")
                     }
                   ></i>
                   Dashboard
@@ -127,11 +132,20 @@ function Sidebar({}: Props) {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (activeMenu === "teacher" ? "text-blue-500 hover:text-blue-600" : "text-gray-700 hover:text-blue-400")
+                    (activeMenu === "teacher"
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-700 hover:text-blue-400")
                   }
                   to="/admin/teacher"
                 >
-                  <i className={"fas fa-book mr-2 text-sm " + (activeMenu === "teacher" ? "opacity-75" : "text-gray-600")}></i>{" "}
+                  <i
+                    className={
+                      "fas fa-book mr-2 text-sm " +
+                      (activeMenu === "teacher"
+                        ? "opacity-75"
+                        : "text-gray-600")
+                    }
+                  ></i>{" "}
                   ครูผู้สอน
                 </Link>
               </li>
@@ -140,11 +154,20 @@ function Sidebar({}: Props) {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (activeMenu === "student" ? "text-blue-500 hover:text-blue-600" : "text-gray-700 hover:text-blue-400")
+                    (activeMenu === "student"
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-700 hover:text-blue-400")
                   }
                   to="/admin/student"
                 >
-                  <i className={"fas fa-user-graduate mr-2 text-sm " + (activeMenu === "student" ? "opacity-75" : "text-gray-600")}></i>{" "}
+                  <i
+                    className={
+                      "fas fa-user-graduate mr-2 text-sm " +
+                      (activeMenu === "student"
+                        ? "opacity-75"
+                        : "text-gray-600")
+                    }
+                  ></i>{" "}
                   นักศึกษา
                 </Link>
               </li>
@@ -152,15 +175,54 @@ function Sidebar({}: Props) {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (activeMenu === "subject" ? "text-blue-500 hover:text-blue-600" : "text-gray-700 hover:text-blue-400")
+                    (activeMenu === "subject"
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-700 hover:text-blue-400")
                   }
                   to="/admin/subject"
                 >
-                  <i className={"fas fa-clipboard-list mr-2 text-sm " + (activeMenu === "subject" ? "opacity-75" : "text-gray-600")}></i>{" "}
+                  <i
+                    className={
+                      "fas fa-clipboard-list mr-2 text-sm " +
+                      (activeMenu === "subject"
+                        ? "opacity-75"
+                        : "text-gray-600")
+                    }
+                  ></i>{" "}
                   วิชาเรียน
                 </Link>
               </li>
-            </ul>            
+            </ul>
+            {/* Divider */}
+            <hr className="my-4 md:min-w-full" />
+            {/* Heading */}
+            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+              จัดการเรียน
+            </h6>
+
+            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+              <li className="items-center">
+                <Link
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (activeMenu === "setclass"
+                      ? "text-blue-500 hover:text-blue-600"
+                      : "text-gray-700 hover:text-blue-400")
+                  }
+                  to="/admin/setclass"
+                >
+                  <i
+                    className={
+                      "fas fa-book mr-2 text-sm " +
+                      (activeMenu === "setclass"
+                        ? "opacity-75"
+                        : "text-gray-600")
+                    }
+                  ></i>{" "}
+                  จัดตารางเรียน
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </nav>

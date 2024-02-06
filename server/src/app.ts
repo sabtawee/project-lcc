@@ -1,6 +1,6 @@
 import fastify, { FastifyServerOptions } from "fastify";
 import cors from '@fastify/cors'
-import { userRouter, teacherRouter, studentRouter, subjectRouter } from "./routes";
+import { userRouter, teacherRouter, studentRouter, subjectRouter, setclassRouter } from "./routes";
 
 const App = (options: FastifyServerOptions) => {
 	const app = fastify(options)
@@ -17,6 +17,7 @@ const App = (options: FastifyServerOptions) => {
     app.register(teacherRouter, { prefix: "api/v1/teachers" })
     app.register(studentRouter, { prefix: "api/v1/students" })
     app.register(subjectRouter, { prefix: "api/v1/subjects" })
+    app.register(setclassRouter, { prefix: "api/v1/setclasses" })
 	return app
 }
 export default App

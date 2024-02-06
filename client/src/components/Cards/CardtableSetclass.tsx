@@ -6,14 +6,14 @@ import Swal from "sweetalert2";
 
 type Props = {};
 
-function CardtableStudent({}: Props) {
+function CardtableSetclass({}: Props) {
   const [datas, setData] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await ApiUrl.get(AdminApiRouter.student);
-      if(res.data.statusCode === 200) {
+      if (res.data.statusCode === 200) {
         setData(res.data.response);
       }
     };
@@ -41,7 +41,6 @@ function CardtableStudent({}: Props) {
       }
     });
   };
-
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white">
@@ -109,4 +108,4 @@ function CardtableStudent({}: Props) {
   );
 }
 
-export default CardtableStudent;
+export default CardtableSetclass;

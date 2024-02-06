@@ -10,6 +10,7 @@ type Student = {
   lastname: string;
   password: string;
   branch: string;
+  model_id: string;
 };
 
 const getStudents = async () => {
@@ -38,7 +39,7 @@ const getStudentById = async (id: Student) => {
 
 const createStudent = async (data: Student) => {
   try {
-    const { student_id, firstname, lastname, password, branch } = data;
+    const { student_id, firstname, lastname, password, branch, model_id } = data;
     const student = await prisma.students.findMany({
       where: {
         student_id: student_id,
@@ -57,6 +58,7 @@ const createStudent = async (data: Student) => {
         lastname,
         password: hash,
         branch,
+        model_id
       },
     });
     return newStudent;
