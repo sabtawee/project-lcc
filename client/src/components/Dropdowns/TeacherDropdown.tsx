@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 
 type Props = {};
 
-function UserDropdown({}: Props) {
+function TeacherDropdown({}: Props) {
   const logout = () => {
     Swal.fire({
       icon: "question",
@@ -19,7 +19,7 @@ function UserDropdown({}: Props) {
         }).then((result) => {
           if (result.isConfirmed) {
             localStorage.removeItem("token");
-            window.location.href = "/";
+            window.location.href = "/teacher";
           }
         });
       }
@@ -50,4 +50,4 @@ function UserDropdown({}: Props) {
   );
 }
 
-export default UserDropdown;
+export default TeacherDropdown;

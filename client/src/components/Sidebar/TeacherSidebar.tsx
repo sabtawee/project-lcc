@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import IMGLOGO from "../../assets/images/lcc.png";
 
-type Props = {};
+type Props = {}
 
-function IndexSidebar({}: Props) {
-  const [collapseShow, setCollapseShow] = useState<string>("hidden");
+function TeacherSidebar({}: Props) {
+    const [collapseShow, setCollapseShow] = useState<string>("hidden");
   const [activeMenu, setActiveMenu] = useState<string>("");
   const location = useLocation();
 
@@ -143,7 +143,7 @@ function IndexSidebar({}: Props) {
                         : "text-blue-100")
                     }
                   ></i>{" "}
-                  ผลการเรียน
+                  ลงผลการเรียน
                 </Link>
               </li>
 
@@ -153,7 +153,7 @@ function IndexSidebar({}: Props) {
         </div>
       </nav>
     </>
-  );
+  )
 }
 
-export default IndexSidebar;
+export default TeacherSidebar

@@ -5,11 +5,11 @@ import AdminLogin from "../pages/admin/AdminLogin";
 type Props = {};
 
 function AdminRoute({}: Props) {
-  // const token : string | null  = localStorage.getItem("token");
+  const token : string | null  = localStorage.getItem("token");
 
-  // if (!token) {
-  //   return <AdminLogin />;
-  // }
+  if (!token) {
+    return <AdminLogin />;
+  }
 
   return (
     <>

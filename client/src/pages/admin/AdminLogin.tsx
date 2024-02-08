@@ -1,9 +1,53 @@
 import IMGBGLOGIN from "../../assets/images/register_bg_2.png";
 import IMGLOGO from "../../assets/images/lcc.png";
+import { useState } from "react";
+
+import ApiUrl from "../../utils/ApiUrl";
+import { AdminApiRouter } from "../../utils/admins/AdminApiRoute";
+
+import Swal from "sweetalert2";
 
 type Props = {};
 
 function AdminLogin({}: Props) {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: any) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    console.log(user);
+    const res = await ApiUrl.post(AdminApiRouter.login, user);
+    console.log(res.data);
+    if (res.data.statusCode == 200) {
+      localStorage.setItem("token", res.data.response.token);
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: res.data.msg,
+      }).then((result) => {
+        if (result.isConfirmed || result.isDismissed) {
+          window.location.href = "/admin";
+        }
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: res.data.msg,
+      });
+    }
+    
+  };
+
   return (
     <>
       <main>
@@ -28,7 +72,7 @@ function AdminLogin({}: Props) {
                     <div className="text-gray-400 text-center mb-3 font-bold">
                       <small>Sing IN ( Admin )</small>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-600 text-xs font-bold mb-2"
@@ -40,6 +84,9 @@ function AdminLogin({}: Props) {
                           type="email"
                           className="border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Email"
+                          name="email"
+                          value={user.email}
+                          onChange={handleChange}
                         />
                       </div>
                       <div className="relative w-full mb-3">
@@ -53,6 +100,9 @@ function AdminLogin({}: Props) {
                           type="password"
                           className="border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Password"
+                          name="password"
+                          value={user.password}
+                          onChange={handleChange}
                         />
                       </div>
 
@@ -72,7 +122,7 @@ function AdminLogin({}: Props) {
                       <div className="text-center mt-6">
                         <button
                           className="bg-gray-800 text-white active:bg-gray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                          type="button"
+                          type="submit"
                         >
                           Sign In
                         </button>

@@ -205,7 +205,7 @@ function Sidebar({}: Props) {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (activeMenu === "setclass"
+                    (activeMenu === "teacher"
                       ? "text-blue-500 hover:text-blue-600"
                       : "text-gray-700 hover:text-blue-400")
                   }

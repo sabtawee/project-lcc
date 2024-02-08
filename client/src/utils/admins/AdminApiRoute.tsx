@@ -1,4 +1,9 @@
 export const AdminApiRouter = {
+
+    // login
+    login : "/api/v1/users/login",
+    auth : "/api/v1/users/auth",
+
     // student
     student : "/api/v1/students",
 

@@ -1,8 +1,8 @@
-import AdminDropdown from "../Dropdowns/AdminDropdown";
+import TeacherDropdown from "../Dropdowns/TeacherDropdown";
 
 type Props = {};
 
-function AdminNavbar({}: Props) {
+function TeacherNavbar({}: Props) {
   return (
     <>
       {/* Navbar */}
@@ -31,7 +31,7 @@ function AdminNavbar({}: Props) {
           </form>
           {/* User */}
           <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-            <AdminDropdown />
+            <TeacherDropdown />
           </ul>
         </div>
       </nav>
@@ -40,4 +40,4 @@ function AdminNavbar({}: Props) {
   );
 }
 
-export default AdminNavbar;
+export default TeacherNavbar;
