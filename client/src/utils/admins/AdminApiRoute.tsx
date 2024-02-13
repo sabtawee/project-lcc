@@ -14,5 +14,8 @@ export const AdminApiRouter = {
     subject : "/api/v1/subjects",
 
     // users
-    users : "/api/v1/users"
+    users : "/api/v1/users",
+
+    // setclass
+    setclass : "api/v1/setclasses"
   };

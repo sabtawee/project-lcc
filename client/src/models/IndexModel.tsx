@@ -1,3 +1,4 @@
+import GradePage from "../pages/GradePage"
 import HomePage from "../pages/HomePage"
 
 export const IndexModel = [
@@ -7,4 +8,10 @@ export const IndexModel = [
         routerPath: '/',
         routerComponent: <HomePage/>,
     },
+    {
+        id: 2,
+        routerName: 'GradePage',
+        routerPath: '/grade',
+        routerComponent: <GradePage/>,
+    }
 ]

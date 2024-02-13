@@ -1,5 +1,5 @@
 
-import CardStats from "../Cards/CardStats"
+// import CardStats from "../Cards/CardStats" 
 type Props = {}
 
 function IndexHeader({}: Props) {
@@ -11,10 +11,10 @@ function IndexHeader({}: Props) {
           <div>
             {/* Card stats */}
             <div className="flex flex-wrap">
-              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+              {/* <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
-                  statSubtitle="ครูผู้สอน"
-                  statTitle="350,897"
+                  statSubtitle="วิชาทีลงเรียน"
+                  statTitle="1"
                   statArrow="up"
                   statPercent="1"
                   statPercentColor="text-emerald-500"
@@ -58,7 +58,7 @@ function IndexHeader({}: Props) {
                   statIconName="fas fa-percent"
                   statIconColor=" bg-blue-500"
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

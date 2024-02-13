@@ -1,4 +1,5 @@
 import AdminHome from "../pages/admin/AdminHome";
+import SetclassCreate from "../pages/admin/setclass/SetclassCreate";
 import SetclassIndex from "../pages/admin/setclass/SetclassIndex";
 import StudentCreate from "../pages/admin/students/StudentCreate";
 import StudentIndex from "../pages/admin/students/StudentIndex";
@@ -56,5 +57,11 @@ export const AdminModel = [
         routerPath: '/setclass',
         routerComponent: <SetclassIndex />
     },
+    {
+        id: 9,
+        routerName: 'SetclassCreate',
+        routerPath: '/setclass/create',
+        routerComponent: <SetclassCreate />
+    }
 
 ]

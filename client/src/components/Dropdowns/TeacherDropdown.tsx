@@ -18,7 +18,10 @@ function TeacherDropdown({}: Props) {
           confirmButtonColor: "#546e7a",
         }).then((result) => {
           if (result.isConfirmed) {
+            localStorage.removeItem("token_teacher");
+            localStorage.removeItem("teacher_id");
             localStorage.removeItem("token");
+            localStorage.removeItem("token_student");
             window.location.href = "/teacher";
           }
         });

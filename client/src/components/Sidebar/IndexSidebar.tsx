@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import IMGLOGO from "../../assets/images/lcc.png";
+import Swal from "sweetalert2";
 
 type Props = {};
 
@@ -10,16 +11,40 @@ function IndexSidebar({}: Props) {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname.startsWith("/admin/teacher")) {
-      setActiveMenu("teacher");
-    } else if (location.pathname.startsWith("/admin/student")) {
-      setActiveMenu("student");
-    } else if (location.pathname.startsWith("/admin/subject")) {
-      setActiveMenu("subject");
+    if (location.pathname.startsWith("/grade")) {
+      setActiveMenu("grade");
     } else {
       setActiveMenu("");
     }
   }, [location.pathname]);
+
+  const logout = () => {
+    Swal.fire({
+      icon: "question",
+      title: "ออกจากระบบ?",
+      text: "ต้องการออกจากระบบหรือไม่",
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: "success",
+          title: "ออกจากระบบสำเร็จ",
+          text: "กำลังออกจากระบบ",
+          confirmButtonColor: "#546e7a",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("token_student");
+            localStorage.removeItem("token_teacher");
+            localStorage.removeItem("student_id");
+            localStorage.removeItem("teacher_id");
+            window.location.href = "/";
+          }
+        });
+      }
+    });
+  };
+
   return (
     <>
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-blue-600 text-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
@@ -35,7 +60,7 @@ function IndexSidebar({}: Props) {
           {/* Brand */}
           <Link
             className="md:block text-left md:pb-2 text-white hover:text-gray-600  mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-            to="/admin"
+            to="/"
           >
             <img src={IMGLOGO} alt="logo" />
           </Link>
@@ -49,7 +74,7 @@ function IndexSidebar({}: Props) {
           {/* Collapse */}
           <div
             className={
-              "md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " +
+              "md:flex md:flex-col md:items-stretch md:opacity-100 text-gray-950 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " +
               collapseShow
             }
           >
@@ -58,10 +83,10 @@ function IndexSidebar({}: Props) {
               <div className="flex flex-wrap">
                 <div className="w-6/12">
                   <Link
-                    className="md:block text-left md:pb-2 text-gray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+                    className="md:block text-left md:pb-2 text-gray-900 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                     to="/"
                   >
-                    <img src={IMGLOGO} alt="logo" className="w-52" />
+                    <img src={IMGLOGO} alt="logo"/>
                   </Link>
                 </div>
                 <div className="w-6/12 flex justify-end">
@@ -75,25 +100,9 @@ function IndexSidebar({}: Props) {
                 </div>
               </div>
             </div>
-            {/* Form */}
-            {/* <form className="mt-6 mb-4 md:hidden">
-              <div className="mb-3 pt-0">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="border-0 px-3 py-2 h-12 border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-blue-600 rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
-                />
-              </div>
-            </form> */}
-
-            {/* Divider */}
-            {/* <hr className="my-4 md:min-w-full" /> */}
-            {/* Heading */}
             <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               Report
             </h6>
-            {/* Navigation */}
-
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li className="items-center">
                 <Link
@@ -103,7 +112,7 @@ function IndexSidebar({}: Props) {
                       ? "text-blue-400 hover:text-blue-100"
                       : "text-blue-100 hover:text-blue-400")
                   }
-                  to="/admin"
+                  to="/"
                 >
                   <i
                     className={
@@ -123,22 +132,21 @@ function IndexSidebar({}: Props) {
               Information
             </h6>
             {/* Navigation */}
-
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (activeMenu === "teacher"
+                    (activeMenu === "grade"
                       ? "text-blue-300 hover:text-gray-600"
                       : "text-blue-100 hover:text-blue-400")
                   }
-                  to="/admin/teacher"
+                  to="/grade"
                 >
                   <i
                     className={
                       "fas fa-book mr-2 text-sm " +
-                      (activeMenu === "teacher"
+                      (activeMenu === "grade"
                         ? "opacity-75"
                         : "text-blue-100")
                     }
@@ -146,8 +154,36 @@ function IndexSidebar({}: Props) {
                   ผลการเรียน
                 </Link>
               </li>
-
-              
+            </ul>
+            {/* Divider */}
+            <hr className="my-4 md:min-w-full" />
+            {/* Heading */}
+            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+              Settings
+            </h6>
+            {/* Navigation */}
+            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+              <li className="items-center">
+                <a
+                  className={
+                    "text-xs uppercase py-3 font-bold block cursor-pointer " +
+                    (activeMenu === "logout"
+                      ? "text-blue-300 hover:text-gray-600"
+                      : "text-blue-100 hover:text-blue-400")
+                  }
+                  onClick={logout}
+                >
+                  <i
+                    className={
+                      "fas fa-book mr-2 text-sm " +
+                      (activeMenu === "logout"
+                        ? "opacity-75"
+                        : "text-blue-100")
+                    }
+                  ></i>{" "}
+                  ออกจากระบบ
+                </a>
+              </li>
             </ul>
           </div>
         </div>

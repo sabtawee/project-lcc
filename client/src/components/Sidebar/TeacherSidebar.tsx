@@ -2,20 +2,16 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import IMGLOGO from "../../assets/images/lcc.png";
 
-type Props = {}
+type Props = {};
 
 function TeacherSidebar({}: Props) {
-    const [collapseShow, setCollapseShow] = useState<string>("hidden");
+  const [collapseShow, setCollapseShow] = useState<string>("hidden");
   const [activeMenu, setActiveMenu] = useState<string>("");
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname.startsWith("/admin/teacher")) {
-      setActiveMenu("teacher");
-    } else if (location.pathname.startsWith("/admin/student")) {
-      setActiveMenu("student");
-    } else if (location.pathname.startsWith("/admin/subject")) {
-      setActiveMenu("subject");
+    if (location.pathname.startsWith("/teacher/grade")) {
+      setActiveMenu("grade");
     } else {
       setActiveMenu("");
     }
@@ -75,24 +71,10 @@ function TeacherSidebar({}: Props) {
                 </div>
               </div>
             </div>
-            {/* Form */}
-            {/* <form className="mt-6 mb-4 md:hidden">
-              <div className="mb-3 pt-0">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="border-0 px-3 py-2 h-12 border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-blue-600 rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
-                />
-              </div>
-            </form> */}
 
-            {/* Divider */}
-            {/* <hr className="my-4 md:min-w-full" /> */}
-            {/* Heading */}
             <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               Report
             </h6>
-            {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
               <li className="items-center">
@@ -103,7 +85,7 @@ function TeacherSidebar({}: Props) {
                       ? "text-blue-400 hover:text-blue-100"
                       : "text-blue-100 hover:text-blue-400")
                   }
-                  to="/admin"
+                  to="/teacher"
                 >
                   <i
                     className={
@@ -129,16 +111,16 @@ function TeacherSidebar({}: Props) {
                 <Link
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (activeMenu === "teacher"
+                    (activeMenu === "grade"
                       ? "text-blue-300 hover:text-gray-600"
                       : "text-blue-100 hover:text-blue-400")
                   }
-                  to="/admin/teacher"
+                  to="/teacher/grade"
                 >
                   <i
                     className={
                       "fas fa-book mr-2 text-sm " +
-                      (activeMenu === "teacher"
+                      (activeMenu === "grade"
                         ? "opacity-75"
                         : "text-blue-100")
                     }
@@ -146,14 +128,12 @@ function TeacherSidebar({}: Props) {
                   ลงผลการเรียน
                 </Link>
               </li>
-
-              
             </ul>
           </div>
         </div>
       </nav>
     </>
-  )
+  );
 }
 
-export default TeacherSidebar
+export default TeacherSidebar;

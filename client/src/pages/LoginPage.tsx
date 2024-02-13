@@ -1,8 +1,45 @@
+import { useState } from "react";
 import IMGBGLOGIN from "../assets/images/register_bg_2.png";
 import IMGLOGO from "../assets/images/lcc.png";
+import ApiUrl from "../utils/ApiUrl";
+import { UserApiRouter } from "../utils/user/UserApiRoute";
+import Swal from "sweetalert2";
+
 type Props = {};
 
 function LoginPage({}: Props) {
+  const [user, setUser] = useState({
+    student_id: "",
+    password: "",
+  });
+
+  const handleChange = (e: any) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const res = await ApiUrl.post(UserApiRouter.login, user);
+    console.log(res);
+    if (res.data.statusCode == 200) {
+      localStorage.setItem("token_student", res.data.response.token);
+      Swal.fire({
+        icon: "success",
+        title: "เข้าสู่ระบบสำเร็จ",
+        text: "กำลังเข้าสู่ระบบ",
+        confirmButtonColor: "#546e7a",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/";
+        }
+      });
+    }
+  }
+
+
   return (
     <>
       <main>
@@ -27,18 +64,21 @@ function LoginPage({}: Props) {
                     <div className="text-gray-400 text-center mb-3 font-bold">
                       <small>Sing IN ( Student )</small>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <div className="relative w-full mb-3">
                         <label
                           className="block uppercase text-gray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Email
+                          รหัสนักศึกษา
                         </label>
                         <input
-                          type="email"
+                          type="text"
                           className="border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                          placeholder="Email"
+                          placeholder="รหัสนักศึกษา"
+                          name="student_id"
+                          value={user.student_id}
+                          onChange={handleChange}
                         />
                       </div>
                       <div className="relative w-full mb-3">
@@ -46,12 +86,15 @@ function LoginPage({}: Props) {
                           className="block uppercase text-gray-600 text-xs font-bold mb-2"
                           htmlFor="grid-password"
                         >
-                          Password
+                          รหัสผ่าน
                         </label>
                         <input
                           type="password"
                           className="border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="Password"
+                          name="password"
+                          value={user.password}
+                          onChange={handleChange}
                         />
                       </div>
                       <div>
@@ -69,7 +112,7 @@ function LoginPage({}: Props) {
                       <div className="text-center mt-6">
                         <button
                           className="bg-gray-800 text-white active:bg-gray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                          type="button"
+                          type="submit"
                         >
                           Sign In
                         </button>

@@ -11,7 +11,7 @@ interface CardStatsProps {
   statIconColor?: string;
 }
 
-function CardStats({
+function CardModel({
   statSubtitle,
   statTitle,
   statIconName,
@@ -19,7 +19,7 @@ function CardStats({
 }: Props) {
   return (
     <>
-      <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
+      <div className="relative flex flex-col min-w-0 break-words bg-blue-300 rounded mb-6 xl:mb-0 shadow-lg">
         <div className="flex-auto p-4">
           <div className="flex flex-wrap">
             <div className="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -47,4 +47,4 @@ function CardStats({
   );
 }
 
-export default CardStats;
+export default CardModel;

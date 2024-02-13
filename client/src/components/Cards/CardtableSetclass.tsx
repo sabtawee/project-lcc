@@ -12,7 +12,7 @@ function CardtableSetclass({}: Props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await ApiUrl.get(AdminApiRouter.student);
+      const res = await ApiUrl.get(AdminApiRouter.setclass);
       if (res.data.statusCode === 200) {
         setData(res.data.response);
       }
@@ -47,10 +47,10 @@ function CardtableSetclass({}: Props) {
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 className="font-semibold text-lg ">รายชื่อนักศึกษา</h3>
+              <h3 className="font-semibold text-lg ">ข้อมูลวิชาเรียนตาม Block</h3>
             </div>
             <button className="btn btn-primary">
-              <Link to="/admin/student/create">เพิ่มนักศึกษา</Link>
+              <Link to="/admin/setclass/create">เพิ่มข้อมูลการเรียน</Link>
             </button>
           </div>
         </div>
@@ -59,13 +59,16 @@ function CardtableSetclass({}: Props) {
             <thead>
               <tr>
                 <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ">
-                  รหัสนักศึกษา
+                  บล็อกเรียน
                 </th>
                 <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ">
-                  ชื่อ - นามสกุล
+                  รหัสวิชา
                 </th>
                 <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ">
-                  สาขาวิชา
+                  วิชา
+                </th>
+                <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ">
+                  ครูผู้สอน
                 </th>
                 <th className="px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ">
                   รุ่น
@@ -77,13 +80,16 @@ function CardtableSetclass({}: Props) {
               {datas.map((item: any, i: number) => (
                 <tr key={i}>
                   <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    {item.student_id}
+                    {item.block_id}
                   </td>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                    {item.firstname} {item.lastname}
+                    {item.subject_id}
                   </th>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                    {item.branch}
+                    {item.subject_name}
+                  </th>
+                  <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                    {item.teacher_name}
                   </th>
                   <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                     {item.model_id}

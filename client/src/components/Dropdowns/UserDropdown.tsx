@@ -19,6 +19,10 @@ function UserDropdown({}: Props) {
         }).then((result) => {
           if (result.isConfirmed) {
             localStorage.removeItem("token");
+            localStorage.removeItem("token_student");
+            localStorage.removeItem("token_teacher");
+            localStorage.removeItem("student_id");
+            localStorage.removeItem("teacher_id");
             window.location.href = "/";
           }
         });

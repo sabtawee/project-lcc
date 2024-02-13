@@ -1,10 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 const prisma = new PrismaClient();
 
 type Teacher = {
-  id: number;
   teacher_id: string;
   firstname: string;
   lastname: string;
@@ -113,9 +112,7 @@ const LoginTeacher = async (data: Teacher) => {
       const isMatch = await bcrypt.compare(password, teacher.password);
       if (isMatch) {
         const payload = {
-          teacher: {
             id: teacher.id,
-          },
         };
         const token = jwt.sign(payload, "secret", {
           expiresIn: "24h",
@@ -132,10 +129,10 @@ const LoginTeacher = async (data: Teacher) => {
 
 const verifyToken = async (token: string) => {
   try {
-    const decoded = jwt.verify(token, "secret");
+    const decoded = jwt.verify(token, "secret") as JwtPayload; // Type assertion
     const teacher = await prisma.teachers.findUnique({
       where: {
-        id: Number(decoded),
+        id: Number(decoded.id),
       },
     });
 
@@ -148,6 +145,7 @@ const verifyToken = async (token: string) => {
     return null;
   }
 };
+
 
 export default {
   getTeachers,
