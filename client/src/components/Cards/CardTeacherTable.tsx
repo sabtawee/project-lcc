@@ -9,14 +9,23 @@ type Props = {
 };
 
 function CardTeacherTable({ title, detail }: Props) {
-  const [idStudent, setIdStudent] = useState(0);
+  const [idStudent, setIdStudent] = useState<number>(0);
   const [score, setScore] = useState(0);
+
+  
 
   const handleOpenModal = (id: number) => {
     setIdStudent(id);
     const my_modal_3 = document.getElementById("my_modal_3");
     my_modal_3?.setAttribute("open", "true");
   };
+
+  const handleCloseModal = () => {
+    setScore(0);
+    setIdStudent(0);
+    const my_modal_3 = document.getElementById("my_modal_3");
+    my_modal_3?.removeAttribute("open");
+  }
 
   const handleChange = (e: any) => {
     setScore(e.target.value);
@@ -139,7 +148,7 @@ function CardTeacherTable({ title, detail }: Props) {
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={handleCloseModal}>
               ✕
             </button>
           </form>

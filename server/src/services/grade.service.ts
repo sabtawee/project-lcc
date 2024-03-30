@@ -89,6 +89,7 @@ const getGradesByTeacher = async (body: any) => {
     const { teacher_id } = body;
     const grades = await prisma.grades.findMany({
       where: {
+        block_id: "1",
         teacher_id: teacher_id,
       },
     });
